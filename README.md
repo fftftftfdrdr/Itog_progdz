@@ -1,45 +1,66 @@
-## Информация о проекте
-Необходимо организовать систему учета для питомника, в котором живут
-домашние и вьючные животные.
-
 ## Задание
 1. Используя команду cat в терминале операционной системы Linux, создать
-два файла Домашние животные (заполнив файл собаками, кошками,
-хомяками) и Вьючные животными заполнив файл Лошадьми, верблюдами и
-ослы), а затем объединить их. Просмотреть содержимое созданного файла.
-Переименовать файл, дав ему новое имя (Друзья человека).
+   два файла Домашние животные (заполнив файл собаками, кошками,
+   хомяками) и Вьючные животными заполнив файл Лошадьми, верблюдами и
+   ослы), а затем объединить их. Просмотреть содержимое созданного файла.
+   Переименовать файл, дав ему новое имя (Друзья человека).
 
-![Task 1](https://user-images.githubusercontent.com/99810114/221401192-b1a5c5aa-d2e2-4531-8341-3b951ee9a5be.jpg)
+   ![1 фото](https://1drv.ms/i/s!AgkPrJL_ljTigltZl6POwgtdMM77?e=kTkF24)
 
 2. Создать директорию, переместить файл туда.
 
-![Task 2](https://user-images.githubusercontent.com/99810114/221401198-5f035f3b-dabb-425a-ae4a-b273822b26bc.jpg)
+![2 фото](https://1drv.ms/i/s!AgkPrJL_ljTiglxZlOH_1fplTu46?e=VBLkxy)
 
 3. Подключить дополнительный репозиторий MySQL. Установить любой пакет
-из этого репозитория.
+   из этого репозитория.
 
-![Task 3](https://user-images.githubusercontent.com/99810114/221401204-319e6e99-7b30-4da1-a0ca-db5d821146c8.jpg)
-![Task 4](https://user-images.githubusercontent.com/99810114/221401211-7563ea97-23dc-4f39-807a-fc6e4a68b598.jpg)
+![3 фото](https://1drv.ms/i/s!AgkPrJL_ljTigl05OrZ9rw_zYhyZ?e=3Q3VZ4)
+![4 фото](https://1drv.ms/i/s!AgkPrJL_ljTigl5oOkEfYdVf5L1m?e=Bar627)
 
 4. Установить и удалить deb-пакет с помощью dpkg.
 
-![Task 5](https://user-images.githubusercontent.com/99810114/221401222-7d436e91-2fdd-4389-8a95-c6ebc7e26300.jpg)
+![5 фото]()
 
-5. Выложить [историю команд](https://github.com/ILYA-NASA/Kennel_account_system/blob/main/HistoryCommandsUbuntuTerminal.md) в терминале ubuntu
-6. Нарисовать [диаграмму](https://github.com/ILYA-NASA/Kennel_account_system/blob/main/UML.drawio), в которой есть класс родительский класс, домашние
-животные и вьючные животные, в составы которых в случае домашних
-животных войдут классы: собаки, кошки, хомяки, а в класс вьючные животные
-войдут: Лошади, верблюды и ослы).
+5. Выложить историю команд в терминале ubuntu
 
-![UML](https://user-images.githubusercontent.com/99810114/221403005-bfe39717-2d41-431d-bc03-f78a1aeb76df.jpg)
+mkdir Kennel
+cd ~/Kennel
+cat > home_animals
+cat > pack_animals
+cat home_animals pack_animals > animals
+cat animals
+mv animals mans_friends
+ls -ali
+cd ..
+mkdir Kennel_system
+cd ~/Kennel
+mv mans_friends ~/Kennel_system
+cd ~/Kennel_system
+ls -ali
+sudo wget https://dev.mysql.com/get/mysql-apt-config_0.8.23-1_all.deb
+sudo dpkg -i mysql-apt-config_0.8.23-1_all.deb
+sudo apt-get update
+sudo apt-get install mysql-server
+sudo wget https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-ce-cli_20.10.13~3-0~ubuntu-jammy_amd64.deb
+sudo dpkg -i docker-ce-cli_20.10.133-0ubuntu-jammy_amd64.deb
+sudo dpkg -r docker-ce-cli
+
+6. Нарисовать диаграмму, в которой есть класс родительский класс, домашние
+   животные и вьючные животные, в составы которых в случае домашних
+   животных войдут классы: собаки, кошки, хомяки, а в класс вьючные животные
+   войдут: Лошади, верблюды и ослы).
+
+![6 фото](https://1drv.ms/i/s!AgkPrJL_ljTigl_V4_i_Il_y0rJC?e=vYGWEn)
 
 7. В подключенном MySQL репозитории создать базу данных “Друзья
-человека”
+   человека”
+
 ```sql
 CREATE DATABASE Human_friends;
 ```
 
 8. Создать таблицы с иерархией из диаграммы в БД
+
 ```sql
 USE Human_friends;
 CREATE TABLE animal_classes
@@ -89,8 +110,10 @@ CREATE TABLE cats
     Foreign KEY (Genus_id) REFERENCES home_animals (Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
+
 9. Заполнить низкоуровневые таблицы именами(животных), командами
-которые они выполняют и датами рождения
+   которые они выполняют и датами рождения
+
 ```sql
 INSERT INTO cats (Name, Birthday, Commands, Genus_id)
 VALUES ('Пупа', '2011-01-01', 'кс-кс-кс', 1),
@@ -174,7 +197,11 @@ VALUES ('Горбатый', '2022-04-10', 'вернись', 3),
 ```
 
 10. Удалив из таблицы верблюдов, т.к. верблюдов решили перевезти в другой
-питомник на зимовку. Объединить таблицы лошади, и ослы в одну таблицу.
+	питомник на зимовку. Объединить таблицы лошади, и ослы в одну таблицу.
+	11.Создать новую таблицу “молодые животные” в которую попадут все
+	животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью
+	до месяца подсчитать возраст животных в новой таблице
+
 ```sql
 SET SQL_SAFE_UPDATES = 0;
 DELETE FROM camels;
@@ -186,6 +213,7 @@ UNION SELECT  Name, Birthday, Commands FROM donkeys;
 11. Создать новую таблицу “молодые животные” в которую попадут все
 животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью
 до месяца подсчитать возраст животных в новой таблице
+
 ```sql
 CREATE TEMPORARY TABLE animals AS 
 SELECT *, 'Лошади' as genus FROM horses
@@ -200,8 +228,10 @@ FROM animals WHERE Birthday BETWEEN ADDDATE(curdate(), INTERVAL -3 YEAR) AND ADD
  
 SELECT * FROM yang_animal;
 ```
+
 12. Объединить все таблицы в одну, при этом сохраняя поля, указывающие на
-прошлую принадлежность к старым таблицам.
+	прошлую принадлежность к старым таблицам.
+
 ```sql
 SELECT h.Name, h.Birthday, h.Commands, pa.Genus_name, ya.Age_in_month 
 FROM horses h
@@ -229,22 +259,26 @@ LEFT JOIN yang_animal ya ON ya.Name = hm.Name
 LEFT JOIN home_animals ha ON ha.Id = hm.Genus_id;
 ```
 
-13. Создать [класс с Инкапсуляцией методов и наследованием по диаграмме](https://github.com/ILYA-NASA/Kennel_account_system/tree/main/System/src/Model).
-14. Написать [программу, имитирующую работу реестра домашних животных](https://github.com/ILYA-NASA/Kennel_account_system/tree/main/System/src).
-В программе должен быть реализован следующий функционал:    
-	14.1 Завести новое животное    
-	14.2 определять животное в правильный класс    
-	14.3 увидеть список команд, которое выполняет животное    
-	14.4 обучить животное новым командам    
-	14.5 Реализовать навигацию по меню    
-15. Создайте [класс Счетчик](https://github.com/ILYA-NASA/Kennel_account_system/blob/main/System/src/Controller/Counter.java), у которого есть метод add(), увеличивающий̆
-значение внутренней̆ int переменной̆ на 1 при нажатии “Завести новое
-животное” Сделайте так, чтобы с объектом такого типа можно было работать в
-блоке try-with-resources. Нужно бросить исключение, если работа с объектом
-типа счетчик была не в ресурсном try и/или ресурс остался открыт. Значение
-считать в ресурсе try, если при заведении животного заполнены все поля.
+13. Создать класс с Инкапсуляцией методов и наследованием по диаграмме.
 
-![Program](https://user-images.githubusercontent.com/99810114/221417421-93de1f4c-ad41-4f7e-a45d-edd5ec72f1d3.jpg)
+Смотреть в папке Model
 
-     
-![image](https://user-images.githubusercontent.com/99810114/222143283-7ec9e203-2a23-4cf4-81b8-b97a159cdc79.png)
+14. Написать программу, имитирующую работу реестра домашних животных.
+	В программе должен быть реализован следующий функционал:
+	14.1 Завести новое животное
+	14.2 определять животное в правильный класс
+	14.3 увидеть список команд, которое выполняет животное
+	14.4 обучить животное новым командам
+	14.5 Реализовать навигацию по меню
+
+Папка src
+
+15. Создайте класс Счетчик, у которого есть метод add(), увеличивающий̆
+	значение внутренней̆int переменной̆на 1 при нажатие “Завести новое
+	животное” Сделайте так, чтобы с объектом такого типа можно было работать в
+	блоке try-with-resources. Нужно бросить исключение, если работа с объектом
+	типа счетчик была не в ресурсном try и/или ресурс остался открыт. Значение
+	считать в ресурсе try, если при заведения животного заполнены все поля.
+
+
+src/Controller/Counter
